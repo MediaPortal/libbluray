@@ -116,7 +116,7 @@ static int _parse_index(BITSTREAM *bs, INDX_ROOT *index)
     }
 
     index->titles = calloc(index->num_titles, sizeof(INDX_TITLE));
-    if (!index->titles) {
+    if (index->num_titles && !index->titles) {
         BD_DEBUG(DBG_CRIT, "out of memory\n");
         return 0;
     }
