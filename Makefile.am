@@ -1,10 +1,15 @@
 include $(top_srcdir)/doxygen-include.am
 
 ACLOCAL_AMFLAGS = -I m4
+DISTCHECK_CONFIGURE_FLAGS = --enable-bdjava --enable-udf
 
 MOSTLYCLEANFILES = $(DX_CLEANFILES)
 
+if ENABLE_UDF
 POSIX_C_SOURCE=200809L
+else
+POSIX_C_SOURCE=200112L
+endif
 
 EXTRA_DIST = \
 	bootstrap \
@@ -35,7 +40,7 @@ libbluray_la_CPPFLAGS = \
 	$(AM_CPPFLAGS) \
 	-I$(top_builddir)/src/libbluray \
 	$(BDJAVA_CFLAGS) \
-	-I${top_srcdir}/contrib/libudfread/src/ \
+	$(UDF_CFLAGS) \
 	$(LIBXML2_CFLAGS) \
 	$(FT2_CFLAGS) \
 	$(FONTCONFIG_CFLAGS)
@@ -166,6 +171,7 @@ libbluray_la_SOURCES += \
 	src/libbluray/bdj/native/util.c
 
 # libudfread
+if ENABLE_UDF
 libbluray_la_SOURCES += \
 	src/libbluray/disc/udf_fs.h \
 	src/libbluray/disc/udf_fs.c\
@@ -177,6 +183,7 @@ libbluray_la_SOURCES += \
 	contrib/libudfread/src/ecma167.c \
 	contrib/libudfread/src/udfread.h \
 	contrib/libudfread/src/udfread.c
+endif
 
 if HAVE_DARWIN
 libbluray_la_SOURCES+= \
@@ -222,7 +229,6 @@ pkginclude_HEADERS = \
 	src/libbluray/bdnav/meta_data.h \
 	src/libbluray/decoders/overlay.h \
 	src/util/log_control.h
-
 
 if USING_BDJAVA
 if USING_BDJAVA_BUILD_JAR
