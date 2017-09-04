@@ -224,6 +224,7 @@ pkginclude_HEADERS = \
 	src/util/log_control.h
 
 
+if USING_BDJAVA
 if USING_BDJAVA_BUILD_JAR
 jardir=$(datadir)/java/
 jar_DATA=$(top_builddir)/.libs/libbluray-$(BDJ_TYPE)-$(VERSION).jar
@@ -245,6 +246,7 @@ clean-local:
 	    -Dversion='$(BDJ_TYPE)-$(VERSION)' \
 	    clean
 endif
+endif
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = src/libbluray.pc
@@ -257,7 +259,6 @@ pkgconfig_DATA = src/libbluray.pc
 if USING_EXAMPLES
 
 noinst_PROGRAMS = \
-	bdj_test \
 	bdjo_dump \
 	bdsplice \
 	clpi_dump \
@@ -268,6 +269,11 @@ noinst_PROGRAMS = \
 	mobj_dump \
 	mpls_dump \
 	sound_dump
+
+if USING_BDJAVA
+noinst_PROGRAMS += \
+	bdj_test
+endif
 
 bin_PROGRAMS = \
 	bd_info
