@@ -81,6 +81,11 @@ AC_ARG_ENABLE([examples],
   [use_examples=$enableval],
   [use_examples=yes])
 
+AC_ARG_ENABLE([bdjava],
+  [AS_HELP_STRING([--disable-bdjava], [disable BD-Java support @<:@default=enabled@:>@])],
+  [use_bdjava=$enableval],
+  [use_bdjava=yes])
+
 AC_ARG_ENABLE([bdjava-jar],
   [AS_HELP_STRING([--disable-bdjava-jar],
   [disable building of BD-Java JAR file @<:@default=enabled@:>@])],
@@ -196,23 +201,24 @@ dnl use examples
 AM_CONDITIONAL([USING_EXAMPLES], [ test $use_examples = "yes" ])
 
 dnl use bdjava
-case $host_cpu in
-     x86_64) java_arch=amd64 ;;
-     i?86)   java_arch=i386 ;;
-     arm*)   java_arch=arm ;;
-     *)      java_arch=$host_cpu ;;
-esac
-case $host_os in
-     linux*)   java_os=linux ;;
-     win*)     java_os=win32 ;;
-     mingw*)   java_os=win32 ;;
-     freebsd*) java_os=freebsd ;;
-     solaris*) java_os=solaris ;;
-     darwin*)  java_os=darwin ;;
-     *)        java_os=$host_os ;;
-esac
+if [[ $use_bdjava = "yes" ]]; then
+  case $host_cpu in
+       x86_64) java_arch=amd64 ;;
+       i?86)   java_arch=i386 ;;
+       arm*)   java_arch=arm ;;
+       *)      java_arch=$host_cpu ;;
+  esac
+  case $host_os in
+       linux*)   java_os=linux ;;
+       win*)     java_os=win32 ;;
+       mingw*)   java_os=win32 ;;
+       freebsd*) java_os=freebsd ;;
+       solaris*) java_os=solaris ;;
+       darwin*)  java_os=darwin ;;
+       *)        java_os=$host_os ;;
+  esac
 
-AS_IF([test "x${JDK_HOME}" != "x"], [
+  AS_IF([test "x${JDK_HOME}" != "x"], [
     BDJAVA_CFLAGS="-I${JDK_HOME}/include -I${JDK_HOME}/include/$java_os"
 
     temp_CPPFLAGS="$CPPFLAGS"
@@ -223,13 +229,16 @@ AS_IF([test "x${JDK_HOME}" != "x"], [
     BDJAVA_CFLAGS='-I${abs_top_srcdir}/jni -I${abs_top_srcdir}/jni/'"${java_os}"
 ])
 
-AC_CHECK_PROG(HAVE_ANT, [ant], yes, no)
-if test "x$use_bdjava_jar" = "xyes" && test "x$HAVE_ANT" = "xno"; then
-    AC_MSG_ERROR([BD-J requires ANT, but ant was not found. Please install it.])
-fi
+  AC_CHECK_PROG(HAVE_ANT, [ant], yes, no)
+  if test "x$use_bdjava_jar" = "xyes" && test "x$HAVE_ANT" = "xno"; then
+      AC_MSG_ERROR([BD-J requires ANT, but ant was not found. Please install it.])
+  fi
 
-AC_DEFINE_UNQUOTED([JAVA_ARCH], ["$java_arch"], ["Defines the architecture of the java vm."])
-AC_DEFINE_UNQUOTED([JDK_HOME], ["$JDK_HOME"], [""])
+  AC_DEFINE([USING_BDJAVA], [1], ["Define to 1 if using BD-Java"])
+  AC_DEFINE_UNQUOTED([JAVA_ARCH], ["$java_arch"], ["Defines the architecture of the java vm."])
+  AC_DEFINE_UNQUOTED([JDK_HOME], ["$JDK_HOME"], [""])
+fi
+AM_CONDITIONAL([USING_BDJAVA], [ test $use_bdjava = "yes" ])
 AM_CONDITIONAL([USING_BDJAVA_BUILD_JAR], [ test $use_bdjava_jar = "yes" ])
 
 dnl BD-J type
@@ -279,17 +288,22 @@ dnl ---------------------------------------------
 
 echo "  Summary:"
 echo "  --------"
+echo "  BD-J support:                  $use_bdjava"
+if [[ $use_bdjava = "yes" ]]; then
 echo "  BD-J type:                     $BDJ_TYPE"
 echo "  build JAR:                     $use_bdjava_jar"
 if test x"$BDJ_BOOTCLASSPATH" != x""; then
 echo "  BD-J bootclasspath:            $BDJ_BOOTCLASSPATH"
 fi
+fi
 echo "  Font support (freetype2):      $with_freetype"
 if [[ $with_freetype = "yes" ]]; then
+if [[ $use_bdjava = "yes" ]]; then
 if test "${SYS}" != "mingw32"; then
 echo "  Use system fonts (fontconfig): $with_fontconfig"
 else
 echo "  Use system fonts:              yes"
+fi
 fi
 fi
 echo "  Metadata support (libxml2):    $with_libxml2"
