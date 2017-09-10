@@ -134,7 +134,12 @@
 #define STDC_HEADERS 1
 
 /* "Define to 1 if using BD-Java" */
-/* #undef USING_BDJAVA */
+#define USING_BDJAVA 1
+
+#define JDK_HOME ""
+
+/* "Define to 1 if using Freetype" */
+#define HAVE_FT2 1
 
 /* Version number of package */
 #define VERSION "1.0.1"
