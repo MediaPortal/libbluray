@@ -231,6 +231,42 @@
     <ClInclude Include="src\libbluray\disc\properties.h">
       <Filter>Header Files\libbluray\disc</Filter>
     </ClInclude>
+    <ClInclude Include="src\file\libaacs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\file\libbdplus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libbluray\bdj\bdj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libbluray\bdj\bdjo_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libbluray\bdj\bdjo_parse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libbluray\bdj\native\bdjo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libbluray\bdj\native\java_awt_BDFontMetrics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libbluray\bdj\native\java_awt_BDGraphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libbluray\bdj\native\org_videolan_Libbluray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libbluray\bdj\native\org_videolan_Logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libbluray\bdj\native\register_native.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libbluray\bdj\native\util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\util\logging.c">
@@ -368,10 +404,40 @@
     <ClCompile Include="src\libbluray\disc\properties.c">
       <Filter>Source Files\libbluray\disc</Filter>
     </ClCompile>
+    <ClCompile Include="src\libbluray\bdj\bdj.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libbluray\bdj\bdjo_parse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libbluray\bdj\native\bdjo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libbluray\bdj\native\java_awt_BDFontMetrics.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libbluray\bdj\native\java_awt_BDGraphics.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libbluray\bdj\native\org_videolan_Libbluray.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libbluray\bdj\native\org_videolan_Logger.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libbluray\bdj\native\register_native.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libbluray\bdj\native\util.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="libbluray.def">
       <Filter>Source Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="src\libbluray\bdj\build.xml" />
   </ItemGroup>
 </Project>

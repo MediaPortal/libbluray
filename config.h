@@ -24,7 +24,7 @@
 /* #undef HAVE_FONTCONFIG */
 
 /* Define this if you have FreeType2 library */
-/* #undef HAVE_FT2 */
+#define HAVE_FT2 1
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
@@ -101,7 +101,7 @@
 /* #undef JAVA_ARCH */
 
 /* "" */
-/* #undef JDK_HOME */
+#define JDK_HOME ""
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #define LT_OBJDIR ".libs/"
@@ -116,7 +116,7 @@
 #define PACKAGE_NAME "libbluray"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "libbluray 1.0.1"
+#define PACKAGE_STRING "libbluray 1.0.2"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "libbluray"
@@ -125,7 +125,7 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.0.1"
+#define PACKAGE_VERSION "1.0.2"
 
 /* Define as the return type of signal handlers (`int' or `void'). */
 #define RETSIGTYPE void
@@ -134,10 +134,10 @@
 #define STDC_HEADERS 1
 
 /* "Define to 1 if using BD-Java" */
-/* #undef USING_BDJAVA */
+#define USING_BDJAVA 1
 
 /* Version number of package */
-#define VERSION "1.0.1"
+#define VERSION "1.0.2"
 
 /* Enable large inode numbers on Mac OS X 10.5.  */
 #ifndef _DARWIN_USE_64_BIT_INODE
