@@ -31,7 +31,19 @@
     <ClInclude Include="src\file\dl.h" />
     <ClInclude Include="src\file\file.h" />
     <ClInclude Include="src\file\filesystem.h" />
+    <ClInclude Include="src\file\libaacs.h" />
+    <ClInclude Include="src\file\libbdplus.h" />
     <ClInclude Include="src\file\mount.h" />
+    <ClInclude Include="src\libbluray\bdj\bdj.h" />
+    <ClInclude Include="src\libbluray\bdj\bdjo_data.h" />
+    <ClInclude Include="src\libbluray\bdj\bdjo_parse.h" />
+    <ClInclude Include="src\libbluray\bdj\native\bdjo.h" />
+    <ClInclude Include="src\libbluray\bdj\native\java_awt_BDFontMetrics.h" />
+    <ClInclude Include="src\libbluray\bdj\native\java_awt_BDGraphics.h" />
+    <ClInclude Include="src\libbluray\bdj\native\org_videolan_Libbluray.h" />
+    <ClInclude Include="src\libbluray\bdj\native\org_videolan_Logger.h" />
+    <ClInclude Include="src\libbluray\bdj\native\register_native.h" />
+    <ClInclude Include="src\libbluray\bdj\native\util.h" />
     <ClInclude Include="src\libbluray\bdnav\bdid_parse.h" />
     <ClInclude Include="src\libbluray\bdnav\bdmv_parse.h" />
     <ClInclude Include="src\libbluray\bdnav\bdparse.h" />
@@ -94,6 +106,15 @@
     <ClCompile Include="src\file\filesystem.c" />
     <ClCompile Include="src\file\file_win32.c" />
     <ClCompile Include="src\file\mount.c" />
+    <ClCompile Include="src\libbluray\bdj\bdj.c" />
+    <ClCompile Include="src\libbluray\bdj\bdjo_parse.c" />
+    <ClCompile Include="src\libbluray\bdj\native\bdjo.c" />
+    <ClCompile Include="src\libbluray\bdj\native\java_awt_BDFontMetrics.c" />
+    <ClCompile Include="src\libbluray\bdj\native\java_awt_BDGraphics.c" />
+    <ClCompile Include="src\libbluray\bdj\native\org_videolan_Libbluray.c" />
+    <ClCompile Include="src\libbluray\bdj\native\org_videolan_Logger.c" />
+    <ClCompile Include="src\libbluray\bdj\native\register_native.c" />
+    <ClCompile Include="src\libbluray\bdj\native\util.c" />
     <ClCompile Include="src\libbluray\bdnav\bdid_parse.c" />
     <ClCompile Include="src\libbluray\bdnav\bdmv_parse.c" />
     <ClCompile Include="src\libbluray\bdnav\clpi_parse.c" />
@@ -136,22 +157,17 @@
   <ItemGroup>
     <None Include="libbluray.def" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="src\libbluray\bdj\build.xml" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E1DA1B95-71F1-4C21-A271-121176925062}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libbluray</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Label="Configuration" Condition="'$(VisualStudioVersion)' == '12.0'">
-    <PlatformToolset>v120</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(VisualStudioVersion)' == '14.0'">
-    <PlatformToolset>v140</PlatformToolset>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(VisualStudioVersion)' == '15.0'">
-    <PlatformToolset>v141</PlatformToolset>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  <PropertyGroup Label="PlatformToolset">
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='DebugRelease'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -189,7 +205,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>HAVE_CONFIG_H;WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBBLURAY_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(VisualStudioVersion)' == '12.0'">__STDC_FORMAT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)includes;$(ProjectDir)src;$(ProjectDir)src\libbluray;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>3rd_party\freetype2\include;jni;jni\win32;$(ProjectDir);$(ProjectDir)includes;$(ProjectDir)src;$(ProjectDir)src\libbluray;$(ProjectDir)contrib\libudfread\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <CompileAs Condition="'$(VisualStudioVersion)' == '12.0'">CompileAsCpp</CompileAs>
     </ClCompile>
@@ -197,6 +213,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>libbluray.def</ModuleDefinitionFile>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">3rd_party\freetype2\objs\Win32\Debug\freetype.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I /Y "$(OutDir)$(TargetName).lib" "$(OutDir)lib\"</Command>
@@ -216,8 +233,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>HAVE_CONFIG_H;WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBBLURAY_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(VisualStudioVersion)' == '12.0'">__STDC_FORMAT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)includes;$(ProjectDir)src;$(ProjectDir)src\libbluray;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>3rd_party\freetype2\include;jni;jni\win32;$(ProjectDir);$(ProjectDir)includes;$(ProjectDir)src;$(ProjectDir)src\libbluray;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">StreamingSIMDExtensions</EnableEnhancedInstructionSet>
       <CompileAs Condition="'$(VisualStudioVersion)' == '12.0'">CompileAsCpp</CompileAs>
     </ClCompile>
@@ -227,6 +244,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>libbluray.def</ModuleDefinitionFile>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">3rd_party\freetype2\objs\Win32\Release\freetype.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</IgnoreAllDefaultLibraries>
       <SetChecksum>true</SetChecksum>
     </Link>
     <PostBuildEvent>

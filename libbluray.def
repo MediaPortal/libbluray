@@ -56,8 +56,16 @@ EXPORTS
                 bd_free_mobj
                 bd_get_clip_infos
                 bd_get_title_mpls
+                bd_select_stream
+                bd_set_rate
 
                 ; additional functions
                 bd_set_debug_handler
                 bd_set_debug_mask
                 bd_get_debug_mask
+                clpi_parse
+                clpi_free
+
+                ; overlay.h
+                bd_refcnt_inc
+                bd_refcnt_dec
