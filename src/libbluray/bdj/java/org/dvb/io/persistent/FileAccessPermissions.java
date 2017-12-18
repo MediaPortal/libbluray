@@ -46,6 +46,14 @@ public class FileAccessPermissions {
     public boolean hasWriteOrganizationAccessRight() {
         return writeOrganization;
     }
+	
+	public boolean hasReadOrganisationAccessRight() {
+        return readOrganization;
+    }
+
+    public boolean hasWriteOrganisationAccessRight() {
+        return writeOrganization;
+    }
 
     public boolean hasReadApplicationAccessRight() {
         return readApplication;
