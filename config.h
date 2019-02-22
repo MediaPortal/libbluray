@@ -164,3 +164,6 @@
 
 /* Using with "USING_BDJAVA_BUILD_JAR" Define using JAVA12+ java_versions = -Djava_version_asm=1.7 -Djava_version_bdj=1.7*/
 /* #define USING_JAVAC_12 */
+
+/* Define no java9 support */
+#define NO_JAVA9_SUPPORT 1

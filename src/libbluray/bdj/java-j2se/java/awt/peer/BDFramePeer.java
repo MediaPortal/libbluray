@@ -173,13 +173,15 @@ public class BDFramePeer extends BDComponentPeer implements FramePeer
         return ((BDToolkit)BDToolkit.getDefaultToolkit()).createImage((Component)null, width, height);
     }
 
-    /* Java >= 9 */
-    public boolean requestFocus(Component c/*lightweightChild*/, boolean a/*temporary*/,
-                                boolean b/*focusedWindowChangeAllowed*/, long l/*time*/,
-                                java.awt.event.FocusEvent.Cause cause
-                                ) {
-        return requestFocusHelper(c, a, b, l);
-    }
+/* Team Mediaportal commented lines for Build with java1.8*/
+//
+//  /* Java >= 9 */
+//   public boolean requestFocus(Component c/*lightweightChild*/, boolean a/*temporary*/,
+//                               boolean b/*focusedWindowChangeAllowed*/, long l/*time*/,
+//                               java.awt.event.FocusEvent.Cause cause
+//                               ) {
+//       return requestFocusHelper(c, a, b, l);
+//   }
 
     /* Java < 9 */
     public boolean requestFocus(Component c, boolean a, boolean b, long l, sun.awt.CausedFocusEvent.Cause d) {
