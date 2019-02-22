@@ -155,3 +155,6 @@
 
 /* Define to '0x0502' for Windows XP SP2 APIs. */
 #define _WIN32_WINNT 0x0502
+
+/* Define no java9 support */
+#define NO_JAVA9_SUPPORT 1
