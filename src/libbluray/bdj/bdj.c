@@ -575,7 +575,8 @@ static char *_find_libbluray_jar1(const char *jar0)
     if (cut <= 0)
         return NULL;
 
-    jar1 = str_printf("%.*sawt-%s", cut, jar0, jar0 + cut);
+    // Team Mediaportal Modification, locate awt file : libbluray.jar to MP program folder. 
+    jar1 = str_printf("%.*s%s%s", cut, jar0, "\\awt" , jar0 + cut);
     if (!jar1)
         return NULL;
 
