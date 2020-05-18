@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="libbluray.def" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="src\libbluray\bdj\build.xml" />
@@ -166,16 +167,8 @@
     <RootNamespace>libbluray</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Label="Configuration" Condition="'$(VisualStudioVersion)' == '12.0'">
-    <PlatformToolset>v120</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(VisualStudioVersion)' == '14.0'">
-    <PlatformToolset>v140</PlatformToolset>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(VisualStudioVersion)' == '15.0'">
-    <PlatformToolset>v141</PlatformToolset>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  <PropertyGroup Label="PlatformToolset">
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='DebugRelease'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
